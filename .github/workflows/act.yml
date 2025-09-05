@@ -1,0 +1,25 @@
+name: forgejo-CreatePR-Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  forgejo-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Forgejo API Action
+        uses: ./
+        with:
+          api_url: ${{ vars.FORGEJO_API_URL }}
+          token: ${{ secrets.FORGEJO_TOKEN }}
+          repository: "owner/repo"
+          assignees: "user1,user2"
+          base: "main"
+          body: "This is my PR"
+          due_date: "2025-12-24"
+          head: "test/mynewbranch"
+          labels: "10,8"
+          milestone: 1
+          title: "Test PR from Action"
+          debug: true

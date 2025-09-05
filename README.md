@@ -1,0 +1,68 @@
+# forgejo-CreatePR
+
+A Github Action to create a pull request on your forgejo instance via API.
+
+## Usage/Examples
+
+Add ```FORGEJO_API_URL``` to your repo vars and ```FORGEJO_TOKEN``` to your repo secrets.
+
+```yaml
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Forgejo API Action
+        uses: timherrm/forgejo-CreatePR@v1
+        with:
+          api_url: ${{ vars.FORGEJO_API_URL }}
+          token: ${{ secrets.FORGEJO_TOKEN }}
+          repository: "owner/repo"
+          assignees: "user1,user2"      #optional
+          base: "main"                  #optional
+          body: "This is my PR"         #optional
+          due_date: "2025-12-24"        #optional
+          head: "feat/mynewbranch"      #optional
+          labels: "1,2,3"               #optional
+          milestone: 1                  #optional
+          title: "Test PR from Action"  #optional
+          #debug: true                  #optional
+
+```
+
+## Inputs/Outputs
+
+see [action.yml](action.yml)
+
+## Local testing with act
+
+Clone the project
+
+```bash
+  git clone https://github.com/timherrm/forgejo-CreatePR
+```
+
+Go to the project directory
+
+```bash
+  cd forgejo-CreatePR
+```
+
+Run
+
+```bash
+  brew install act node
+  npm install @actions/core @actions/github axios @vercel/ncc
+  npm init -y
+  ncc build src/main.js -o dist
+  act --var-file .variables
+```
+
+## Resources
+
+[https://forgejo.your.host/api/swagger](https://forgejo.your.host/api/swagger)
+
+[https://forgejo.your.host/swagger.v1.json](https://forgejo.your.host/swagger.v1.json)
+
+## Authors
+
+- [@timherrm](https://www.github.com/timherrm)

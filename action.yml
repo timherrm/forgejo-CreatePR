@@ -1,0 +1,48 @@
+name: "Forgejo-CreatePR"
+description: "A Github Action to create a pull request on your forgejo instance via API."
+branding:
+  icon: 'terminal'
+  color: 'purple'
+
+inputs:
+  api_url:
+    description: "The base URL of the Forgejo API."
+    required: true
+  token:
+    description: "The authentication token for accessing the Forgejo API."
+    required: true
+  repository:
+    description: "The repository in the format owner/repo."
+    required: true
+  base:
+    description: "The name of the base branch to pull into."
+    required: false
+  body:
+    description: "The body of the pull request."
+    required: false
+  due_date:
+    description: "The due date for the pull request in format YYYY-MM-DD."
+    required: false
+  head:
+    description: "The name of the branch to pull from."
+    required: false
+  labels:
+    description: "The id of the labels for the pull request in format id,id."
+    required: false
+  milestone:
+    description: "The id of the milestone to assign."
+    required: false
+  title:
+    description: "The title of the pull request."
+    required: false
+  debug:
+    description: "The boolean to enable debug output. Options: true"
+    required: false
+
+outputs:
+  result:
+    description: "The result of the action, including success or error messages."
+    value: "${{ steps.run.outputs.result }}"
+runs:
+  using: "node12"
+  main: "dist/index.js"
